@@ -144,9 +144,9 @@ function ShapePreview({ shape, color }) {
 
 export default function BoxFitGame() {
   const [ydoc] = useState(() => new Y.Doc());
-  const [provider] = useState(
-    () => new WebsocketProvider("ws://localhost:1234", "boxfit-room", ydoc)
-  );
+  // const [provider] = useState(
+  //   () => new WebsocketProvider("ws://localhost:1234", "boxfit-room", ydoc)
+  // );
 
   const ygrid = ydoc.getArray("grid");
   const yscore = ydoc.getMap("score");
