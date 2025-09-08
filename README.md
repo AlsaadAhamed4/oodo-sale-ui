@@ -1,132 +1,95 @@
-# BoxFit Multiplayer Collaborative Puzzle Game
+Sales Analytics Dashboard
+A modern, real-time dashboard for sales analytics, built in React and styled with Tailwind CSS. The dashboard supports live KPI updates, drag-and-drop customization, offline usage, and high performance even for large data sets.
 
-A real-time collaborative multiplayer game where players work together to fit and place differently shaped items into a shared 10×10 grid container. This React app uses Yjs for conflict-free shared state synchronization and a WebSocket server for realtime collaboration.
+Features
+Live Sales Data: Displays revenue and COGS per product category, updating automatically when sales orders are confirmed or delivered.
 
-## Features
+Drag-and-Drop Customization: Rearrange KPI cards with a smooth drag-and-drop interface powered by @dnd-kit.
 
-- **Fixed 10×10 shared grid** representing the box container.
-- **Shape item selection, rotation, and placement** with collision and grid-boundary rules.
-- **Real-time synchronization across multiple players** using [Yjs](https://yjs.dev/) and a WebSocket provider.
-- **Live scoring system** awarding points for valid placements.
-- **Player list with clickable names** to scroll and highlight their placed pieces on the grid.
-- **Visual separation indicator**: a vertical border divides the grid into two player areas.
-- Modern, dark-themed responsive UI with preview and scoreboards.
+Offline Support: Uses IndexedDB to cache sales data locally. Works seamlessly even without an internet connection.
 
-## Demo
+High Performance: Renders efficiently with support for 100+ product categories using grid layout and fast UI updates.
 
-*(You can deploy this with your own Yjs websocket server or run locally. No public demo available by default.)*
+Collaboration Ready: Optionally syncs card layout across sessions with Yjs (requires backend setup).
 
-## Installation and Running Locally
+Beautiful UI: Responsive, accessible, and visually appealing, thanks to Tailwind CSS.
 
-### Prerequisites
+Installation
+Clone the repository
 
-- [Node.js](https://nodejs.org/) (v14+ recommended)
-- npm (comes with Node.js)
+bash
+git clone https://github.com/yourusername/sales-dashboard.git
+cd sales-dashboard
+Install dependencies
 
-### Setup
-
-1. Clone or download this repository to your local machine.
-
-2. Install required dependencies:
-
-```bash
+bash
 npm install
-```
+Set up Tailwind CSS
 
-3. Install Yjs websocket server dependency:
+Ensure these lines are at the top of your src/index.css:
 
-```bash
-npm install @y/websocket-server yjs y-websocket react react-dom
-```
+css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+Your tailwind.config.js should include:
 
-4. Run the Yjs WebSocket server locally (this server enables realtime collaboration):
+js
+module.exports = {
+content: ["./src/**/*.{js,jsx,ts,tsx}"],
+theme: { extend: {} },
+plugins: [],
+};
+Start the development server
 
-```bash
-npx @y/websocket-server --port 1234
-```
-
-Leave this running in a terminal window.
-
-5. Start your React development server (assuming create-react-app or similar):
-
-```bash
+bash
 npm start
-```
+Usage
+Dashboard UI: The main dashboard view loads and displays KPI cards for each product category.
 
-## Usage
+Drag-and-Drop: Click/tap and drag any KPI card to rearrange cards to your preference.
 
-- Open your app in one or more browser windows or devices on the same network.
-- The app automatically connects to your local websocket server at `ws://localhost:1234`.
-- Select a piece from the **Pieces** panel.
-- Rotate the piece by clicking the **Rotate** button.
-- Hover over the grid to preview valid placement positions.
-- Click an empty grid cell to place the piece.
-- Scores update live for all players.
-- In the **Players** list, click on a player’s name to scroll and highlight their placed pieces.
-- The grid has a vertical golden border visually separating two player areas.
+Offline Mode: Disconnect from the network and interact with previously cached data without interruption.
 
-## Folder Structure
+Customization and Advanced Setup
+Data Source: Replace the mock fetchSalesData function in DashboardContainer.jsx with your real Odoo RPC/API integration for production use.
 
-- `src/`
-  - `BoxFitGame.jsx` — Main React component for the game UI and logic.
-  - Other standard React boilerplate files.
+Collaboration: Integrate the Yjs backend for real-time collaborative editing of KPI card layouts.
 
-## Technologies Used
+Styling: Tailwind CSS classes are used throughout; customize your theme in tailwind.config.js as desired.
 
-- **React** — Frontend UI framework.
-- **Yjs** — CRDT-based real-time collaboration engine.
-- **@y/websocket-server** — WebSocket server for Yjs document sync.
-- **JavaScript (JSX)** — Implementation language.
+Performance: For extremely large data sets, hybrid virtualization libraries can be introduced.
 
-## Customization
+Project Structure
+text
+src/
+components/
+DashboardContainer.jsx
+KpiCard.jsx
+useSharedLayout.js
+utils/
+indexedDB.js
+index.css
+App.jsx
+tailwind.config.js
+Dependencies
+React (UI library)
 
-- Change the server URL in `BoxFitGame.jsx` inside the `WebsocketProvider` constructor:
+Tailwind CSS (utility-first CSS framework)
 
-```js
-new WebsocketProvider("ws://localhost:1234", "boxfit-room", ydoc);
-```
+@dnd-kit/core (drag-and-drop library)
 
-- Add more shapes in the `SHAPES` array.
-- Adjust grid size by editing `GRID_SIZE`.
-- Modify scoring logic in `handlePlace` method.
-- Style adjustments via inline styles in `BoxFitGame.jsx`.
+react-query (data fetching and state management)
 
-## Next Steps / Possible Enhancements
+react-virtualized (optional, for virtualization)
 
-- Undo/redo support using Yjs version history.
-- Player presence indicators and ghost cursors.
-- Chat box integration for player communication.
-- Authentication and persistent user accounts.
-- Persistent storage of game history and scores on backend.
-- Deploy WebSocket server to cloud or private network.
+idb (IndexedDB wrapper)
 
-## Troubleshooting
+Yjs and y-websocket (optional, for sync)
 
-### WebSocket connection errors
+License
+MIT
 
-- Ensure the Yjs websocket server is running before launching the React app.
-- Check the WebSocket URL matches your running server.
-- On firewall or network-restricted environments, open required ports.
-
-### Permission errors installing `@y/websocket-server`
-
-- Use `npx` instead of global install to avoid permission issues:
-
-```bash
-npx @y/websocket-server --port 1234
-```
-
-## License
-
-This project is open source and available under the MIT License.
-
-## Acknowledgments
-
-- [Yjs](https://yjs.dev/) for enabling excellent realtime collaboration technology.
-- Inspiration from multiplayer grid puzzle games like BoxFit.
-
-If you need help deploying or customizing the app, feel free to raise issues or contact the maintainer.
-
-**Enjoy collaborating and fitting together!** 🎮📦
-
-Let me know if you want me to generate the README in markdown `.md` file format or any other formatting style!
+Author
+Alsaad
+AlsaadAhamed4
