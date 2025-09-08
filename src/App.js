@@ -1,10 +1,14 @@
-import BoxFitGame from "./componets/BoxFitGame";
+import React from "react";
+import DashboardContainer from "./components/DashboardContainer";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
-      <div>
-        <BoxFitGame/>
-      </div>
+    <QueryClientProvider client={queryClient}>
+      <DashboardContainer />
+    </QueryClientProvider>
   );
 };
 
